@@ -91,7 +91,7 @@ public class SecurePreferences implements SharedPreferences {
 
 	private String encrypt(String value) {
 		try {
-			return Base64.encodeToString(encrypter.doFinal(value.getBytes()), Base64.DEFAULT);
+			return Base64.encodeToString(encrypter.doFinal(value.getBytes()), Base64.DEFAULT).trim();
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -100,7 +100,7 @@ public class SecurePreferences implements SharedPreferences {
 
 	private String decrypt(String value) {
 		try {
-			return new String(decrypter.doFinal(Base64.decode(value, Base64.DEFAULT)));
+			return new String(decrypter.doFinal(Base64.decode(value, Base64.DEFAULT))).trim();
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
